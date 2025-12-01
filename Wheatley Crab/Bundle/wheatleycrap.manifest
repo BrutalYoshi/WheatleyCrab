@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 4053415240
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b3dd5010736b433c641af1a8531bef5e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a6ca8a723faa482f5fa264f1c8ede349
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Aeiou/Body.mat
+- Assets/Materials/texWorkerUnitDiff.mat
+- Assets/Aeiou/glados_ball_01.png
+- Assets/Aeiou/Body2.mat
+- Assets/Aeiou/WheatleyCrab22.fbx
+- Assets/Aeiou/WheatleyCrabheh.prefab
+- Assets/Aeiou/texWorkerUnitDiff.png
+- Assets/Aeiou/texWorkerUnitIcon.png
+Dependencies: []

@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>Wheatley_Crab</RootNamespace>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="Exists('$(MSBuildProgramFiles32)/Steam/steamapps/common/Risk of Rain 2/Risk of Rain 2_Data/Managed/')">
+        <RoR2Folder>$(MSBuildProgramFiles32)\Steam\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\</RoR2Folder>
+    </PropertyGroup>
+    <PropertyGroup Condition="Exists('D:/SteamLibrary/steamapps/common/Risk of Rain 2/Risk of Rain 2_Data/Managed/')">
+        <RoR2Folder>D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\</RoR2Folder>
+    </PropertyGroup>
+    <PropertyGroup Condition="Exists('G:/SteamLibrary/steamapps/common/Risk of Rain 2/Risk of Rain 2_Data/Managed/')">
+        <RoR2Folder>G:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\</RoR2Folder>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all"/>
+        <PackageReference Include="BepInEx.Core" Version="5.4.19"/>
+        <PackageReference Include="UnityEngine.Modules" Version="2021.3.33"/>
+        <PackageReference Include="Rune580-Risk_Of_Options" Version="2.8.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="!Exists($(RoR2Folder))">
+        <PackageReference Include="RiskOfRain2.GameLibs" Version="1.4.0-r.0"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists($(RoR2Folder))">
+        <Reference Include="RoR2" Publicize="true">
+            <HintPath>$(RoR2Folder)RoR2.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp" Publicize="true">
+            <HintPath>$(RoR2Folder)Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="com.unity.multiplayer-hlapi.Runtime" Publicize="true">
+            <HintPath>$(RoR2Folder)com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Addressables" Publicize="true">
+            <HintPath>$(RoR2Folder)Unity.Addressables.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ResourceManager">
+            <HintPath>$(RoR2Folder)Unity.ResourceManager.dll</HintPath>
+        </Reference>
+        <Reference Include="KinematicCharacterController.dll">
+            <HintPath>$(RoR2Folder)KinematicCharacterController.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(RoR2Folder)UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro">
+            <HintPath>$(RoR2Folder)Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="LegacyResourcesAPI">
+            <HintPath>$(RoR2Folder)LegacyResourcesAPI.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.API">
+            <HintPath>$(RoR2Folder)AK.Wwise.Unity.API.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.API.WwiseTypes.dll" Publicize="true">
+            <HintPath>$(RoR2Folder)AK.Wwise.Unity.API.WwiseTypes.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.MonoBehaviour.dll">
+            <HintPath>$(RoR2Folder)AK.Wwise.Unity.MonoBehaviour.dll</HintPath>
+        </Reference>
+        <Reference Include="HGCSharpUtils.dll">
+            <HintPath>$(RoR2Folder)HGCSharpUtils.dll</HintPath>
+        </Reference>
+        <Reference Include="Rewired_Core.dll">
+            <HintPath>$(RoR2Folder)Rewired_Core.dll</HintPath>
+        </Reference>
+        <Reference Include="HGUnityUtils.dll">
+            <HintPath>$(RoR2Folder)HGUnityUtils.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <UserDir>$(HOMEDRIVE)$(HOMEPATH)</UserDir>
+        <DestinationFolder>$(UserDir)\AppData\Roaming\com.kesomannen.gale\riskofrain2\profiles\unity view\BepInEx\plugins\</DestinationFolder>
+    </PropertyGroup>
+    <ItemGroup>
+        <_BundleItems Include="$(ProjectDir)Bundle\**\*.*"/>
+    </ItemGroup>
+    <Target Name="CopyDLLs" AfterTargets="Build" Condition="Exists($(DestinationFolder))">
+        <Message Text="Executing CopyDLLs task" Importance="High"/>
+
+        <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;$(TargetDir)$(ProjectName).pdb" DestinationFolder="$(DestinationFolder)$(ProjectName)"/>
+        <Copy SourceFiles="@(_BundleItems)" DestinationFolder="$(DestinationFolder)$(ProjectName)\%(RecursiveDir)"/>
+
+        <Message Text="Copied build files" Importance="High"/>
+    </Target>
+</Project>
