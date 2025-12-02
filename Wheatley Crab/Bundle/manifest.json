@@ -2,7 +2,7 @@
   "namespace": "GAYBAR",
   "name": "WheatleyCrab",
   "description": "replaces Solus Prospector with Wheatley from the famous video Wheatley Crab",
-  "version_number": "1",
+  "version_number": "1.0.2",
   "dependencies": [
     "bbepis-BepInExPack-5.4.19"
   ],
