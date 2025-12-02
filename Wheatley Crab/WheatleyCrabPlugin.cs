@@ -55,8 +55,6 @@ namespace Wheatley_Crab
             crabVolume = Config.Bind("General", "Crab Volume", 50f, "Loudness of Crab.");
 
             crabVolume.SettingChanged += (_, _) => AkSoundEngine.SetRTPCValue("Crab_Volume", crabVolume.Value);
-            AkSoundEngine.SetRTPCValue("Crab_Volume", crabVolume.Value);
-
             if (IsEnabledROO)
                 InitRoo();
         }
@@ -89,6 +87,9 @@ namespace Wheatley_Crab
             worker.baseNameToken = "WHEATLEY_CRAB_NAME";
             worker.subtitleNameToken = "WHEATLEY_CRAB_SUBTITLE";
             worker.portraitIcon = bundle.LoadAsset<Sprite>("texWorkerUnitIcon").texture;
+            
+            AkSoundEngine.SetRTPCValue("Crab_Volume", crabVolume.Value);
+
 /*
 crab.transform.Find("Armature/mdlWorkerUnit/wheatley_crab_reference").SetParent(modelTransform);
 crab.transform.Find("meshWorkerUnit.040").SetParent(modelTransform);
